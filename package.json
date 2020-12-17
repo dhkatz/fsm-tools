@@ -2,6 +2,7 @@
   "name": "fsm-tools",
   "version": "0.1.0",
   "homepage": "https://dhkatz.github.io/fsm-tools",
+  "repository": "https://github.com/dhkatz/fsm-tools",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.6",
