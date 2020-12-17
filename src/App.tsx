@@ -1,25 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Nav, Navbar } from 'react-bootstrap';
+
+import { BrowserRouter as Router, Link, NavLink, Route, Switch } from "react-router-dom";
+import { Simulator, Minimizer } from './pages';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <Router>
+      <header>
+        <Navbar className="mx-auto" style={{ maxWidth: "1150px" }} collapseOnSelect expand="lg" variant="light">
+          <Navbar.Brand as={Link} to="/">FSM Tools</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+          <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="mr-auto">
+                  <Nav.Link className="text-secondary" as={NavLink} to="/simulator">Simulator</Nav.Link>
+                  <Nav.Link className="text-secondary" as={NavLink} to="/minimizer">Minimizer</Nav.Link>
+              </Nav>
+          </Navbar.Collapse>
+        </Navbar>
       </header>
-    </div>
+      <main>
+        <Switch>
+          <Route path="/simulator">
+            <Simulator/>
+          </Route>
+          <Route path="/minimizer">
+            <Minimizer/>
+          </Route>
+        </Switch>
+      </main>
+    </Router>
   );
 }
 
