@@ -5,15 +5,16 @@ import { MachineSimulator } from '../components';
 import {StateMachine} from "../fsm";
 
 export const Simulator = () => {
-    const [description, setDescription] = useState<string>("");
+    const [description, setDescription] = useState<string>(DEFAULT_MACHINE);
     const [input, setInput] = useState("");
     const [accepted, setAccepted] = useState(false);
+    const [hash, setHash] = useState("");
 
     useEffect(() => {
         try {
             const machine = StateMachine.parse(description);
-            console.log(machine);
             setAccepted(machine.isAccepted(input));
+            setHash(machine.hash());
         } catch {
             setAccepted(false);
         }
@@ -29,7 +30,14 @@ export const Simulator = () => {
                       <InputGroup.Prepend>
                           <InputGroup.Text>Input</InputGroup.Text>
                       </InputGroup.Prepend>
-                      <FormControl as={"textarea"} aria-label="input" onChange={(e) => setDescription(e.target.value)} />
+                      <FormControl as={"textarea"} aria-label="input" value={description} onChange={(e) => setDescription(e.target.value)} />
+                  </InputGroup>
+                  <br/>
+                  <InputGroup style={{ height: "90px"}}>
+                      <InputGroup.Prepend>
+                          <InputGroup.Text>Hash</InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <FormControl disabled as={"textarea"} aria-label="input" value={hash} />
                   </InputGroup>
               </Col>
               <Col>
@@ -48,3 +56,25 @@ export const Simulator = () => {
       </Container>
     )
 }
+
+const DEFAULT_MACHINE = `:states:
+a
+b
+c
+d
+:initial:
+a
+:accept:
+c
+:alphabet:
+0
+1
+:transitions:
+a,0>b
+a,1>a
+b,0>d
+b,1>c
+c,0>c
+c,1>b
+d,0>d
+d,1>c`;

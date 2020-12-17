@@ -14,3 +14,6 @@ Start the development server with `npm start`. Any changes made to the `src`
 directory will be immediately available.
 
 ## Building
+
+Running `npm build` will build a product optimized static version of the site. This can be
+immediately served with `npx serve ./build`.

@@ -23,13 +23,17 @@ b, 1 > a`;
 
 export const Minimizer = () => {
   const [description, setDescription] = useState<string>(DEFAULT_MACHINE);
-    const [minimized, setMinimized] = useState<string>("");
+  const [minimized, setMinimized] = useState<string>("");
+  const [hash, setHash] = useState("");
+  const [minimizedHash, setMinimizedHash] = useState("");
 
     useEffect(() => {
       try {
-        const machine = StateMachine.parse(description).minimize();
-        console.log(machine);
+        const base = StateMachine.parse(description);
+        const machine = base.minimize();
         setMinimized(machine.description());
+        setHash(base.hash());
+        setMinimizedHash(machine.hash());
       } catch {
         setMinimized({} as any)
       }
@@ -52,6 +56,15 @@ export const Minimizer = () => {
                 </Row>
                 <br/>
                 <Row>
+                  <InputGroup style={{ height: "90px", width: "100%" }}>
+                    <InputGroup.Prepend>
+                      <InputGroup.Text>Hash</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl disabled as={"textarea"} aria-label="input" value={hash} />
+                  </InputGroup>
+                </Row>
+                <br/>
+                <Row>
                   <h2>Input Machine</h2>
                   <MachineSimulator description={description} options={{ height: 200 }} />
                 </Row>
@@ -66,6 +79,15 @@ export const Minimizer = () => {
                       <InputGroup.Text>Input</InputGroup.Text>
                     </InputGroup.Prepend>
                     <FormControl disabled as={"textarea"} value={minimized} />
+                  </InputGroup>
+                </Row>
+                <br/>
+                <Row>
+                  <InputGroup style={{ height: "90px"}}>
+                    <InputGroup.Prepend>
+                      <InputGroup.Text>Hash</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl disabled as={"textarea"} aria-label="input" value={minimizedHash} />
                   </InputGroup>
                 </Row>
                 <br/>

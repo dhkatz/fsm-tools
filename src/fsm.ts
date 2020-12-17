@@ -135,6 +135,13 @@ export class StateMachine extends Graph {
     }
 
     /**
+     * A unique hash based on the description of the machine.
+     */
+    public hash(): string {
+        return btoa(this.minimize().description());
+    }
+
+    /**
      * Build the textual description of this machine.
      * This can be used for debugging or constructing other machines.
      * @returns {string}
