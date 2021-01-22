@@ -1,12 +1,12 @@
 import React from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 
-import { BrowserRouter as Router, Link, NavLink, Route, Switch } from "react-router-dom";
+import { Link, NavLink, Route, Switch, HashRouter as Router } from "react-router-dom";
 import {Simulator, Minimizer, Home} from './pages';
 
 function App() {
   return (
-    <Router basename={"/fsm-tools"}>
+    <Router basename={"/"}>
       <header>
         <Navbar className="mx-auto" style={{ maxWidth: "1150px" }} collapseOnSelect expand="lg" variant="light">
           <Navbar.Brand as={Link} to="/">FSM Tools</Navbar.Brand>
